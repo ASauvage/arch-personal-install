@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # This script mount disk using fstab (WIP)
 
-echo ":: Fetching disks"
-echo $(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk | awk '{print $1}')
+echo ":: fetching disks\n:: disk available"
+
+echo $(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk | awk '{print $1, "\t", $2}')
+disks=$(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk | awk '{print $1}')
 
 DISK=$(gum choose --no-limit --header "Found disks" $(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk | awk '{print $1}'))
 

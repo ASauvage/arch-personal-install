@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# This scritpt config git
+# This scritpt config Git
 
-echo ":: Configuring git and SSH key"
+echo ":: configuring Git and SSH key"
 
 if [ ! -f ~/.ssh/id_ed25519 ]; then
     ssh-keygen -t ed25519 -C ""
@@ -10,5 +10,7 @@ else
     echo ":: SSH key already exists"
 fi
 
-git config --global user.name "$(read -p "Enter your git username: ")"
-git config --global user.email "$(read -p "Enter your git email: ")"
+git config --global user.name "$(read -p "Enter your Git username: ")"
+git config --global user.email "$(read -p "Enter your Git email: ")"
+
+echo ":: Git succefully configured"
