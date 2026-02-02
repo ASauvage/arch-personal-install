@@ -1,0 +1,5 @@
+hyprpanel
+nitch
+spotify
+visual-studio-code-bin
+webcord
