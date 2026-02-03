@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # This scritpt config Git
 
-echo ":: configuring Git and SSH key"
+read -p ":: Proceed with configuring git and SSH key? [Y/n] " -n 1 -r
+
+echo ":: Configuring Git and SSH key..."
 
 if [ ! -f ~/.ssh/id_ed25519 ]; then
     ssh-keygen -t ed25519 -C ""

@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 # This script install packages from packages/ folder
 
-echo ":: updating using pacman"
+echo ":: Updating using pacman..."
 sudo pacman -Syu --needed --nocomfirm
 
-echo ":: installing package from pacman repository"
+echo ":: Installing package from pacman repository..."
 sudo pacman -S --needed --norcomfirm - < packages/pacman.txt
 
-echo ":: installing package from Aur"
+echo ":: Installing package from Aur..."
 
 if ! command -v yay > /dev/null; then
-    echo ":: yay not installed\n:: installing yay"
+    echo ":: Yay not installed\n:: Installing yay..."
 
     sudo pacman -S --needed --nocomfirm base-devel git
     git clone https://aur.archlinux.org/yay.git /tmp/yay
 
     (cd /tmp/yay && makepkg -si --nocomfirm)
-    echo ":: yay installed"
+    echo ":: Yay installed"
 fi
 
 yay -S --needed --nocomfirm - < packages/aur.txt
 
-echo ":: packages installed successfully"
+echo ":: All packages successfully installed"

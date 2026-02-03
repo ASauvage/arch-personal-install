@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
-# This script mount disk using fstab (WIP)
+# This script mount disks using fstab (WIP)
 
-echo ":: fetching disks\n:: disk available"
+echo ":: Fetching disks...\n:: disks available"
 
 echo $(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk | awk '{print $1, "\t", $2}')
 disks=$(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk | awk '{print $1}')
 
-DISK=$(gum choose --no-limit --header "Found disks" $(lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk | awk '{print $1}'))
-
-for i in $DISK; do
-    if gum confirm "Proceed to mount disk $(gum style --foreground 212 $i)?"; then
-        echo ":: Mounting disk $(gum style --foreground 212 $i)"
+for i in $disks; do
+    if gum confirm ":: Proceed to mount disk $i?"; then
+        echo ":: Mounting disk $i"
         sudo mkdir /mnt/$i
         echo "UUID=XXXXXX-XXXX-XXXX /mnt/$i btrfs defaults 0 2" | sudo tee -a /etc/fstab
     else
@@ -19,4 +17,4 @@ for i in $DISK; do
 done
 
 sudo mount -a
-echo ":: Disk configuration complete"
+echo ":: Disks configuration complete"
