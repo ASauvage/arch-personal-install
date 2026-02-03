@@ -20,6 +20,7 @@ hyprpicker
 hyprshot
 hyprsunset
 hyprutils
+man-db
 nautilus
 neofetch
 networkmanager
@@ -27,6 +28,7 @@ pipewire
 rofi
 rofi-calc
 rofi-emoji
+rsync
 sddm
 starship
 swww
