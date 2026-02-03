@@ -15,3 +15,9 @@ if ! sudo -v; then
     echo ":: Sudo not available"
     exit 1
 fi
+
+read -p ":: Checks completed\n:: Proceed with installation? [Y/n] " -n 1 -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo ":: Abord installation..."
+    exit 1
+fi

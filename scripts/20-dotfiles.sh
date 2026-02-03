@@ -1,12 +1,29 @@
 #!/usr/bin/env bash
 # This script install dotfiles
 
-echo ":: Installing dotfiles..."
+read -p ":: Proceed with installing dotfiles? [Y/n] " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ -d "$HOME/.config" ]];; then
+        read -p ":: Dotfiles found, back it up? [Y/n] " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            echo ":: Copying dotfiles..."
+            cp "$HOME/.config" "$HOME/.config_bak"
+            echo ":: Backup complete under $HOME/.config_bak"
+        else
+            echo ":: Skipping dotfiles backup"
+        fi
+    fi
 
-DOTFILES="$PWD/dotfiles"
+    echo ":: Installing dotfiles..."
 
-mkdir -p ~/.config
+    DOTFILES="$PWD/dotfiles"
 
-rsync -a --delete "$DOTFILES/.config" ~/.config
+    mkdir -p ~/.config
+    rsync -a --delete "$DOTFILES/.config" $HOME/.config
+    rsync -a --delete "$DOTFILES/.bash_aliases" "$HOME/.bash_aliases"
+    rsync -a --delete "$DOTFILES/.vimrc" "$HOME/.vimrc"
 
-echo ":: Dotfiles successfully installed"
+    echo ":: Dotfiles successfully installed"
+else
+    echo ":: Skipping dotfile installation"
+fi
